@@ -1340,7 +1340,7 @@ int gui::ty, gui::tx, gui::tpos, *gui::tcurrent, gui::tcolor;
 vector<int> gui::curchildpath;
 vector<int> gui::activechildpath;
 vector<int> gui::nextactivechildpath;
-static vector<gui> guis;
+static vector<guicb *> guis;
 
 namespace UI
 {
@@ -1436,9 +1436,7 @@ namespace UI
 
     void addcb(guicb *cb)
     {
-        gui &g = guis.add();
-        g.cb = cb;
-        g.adjustscale();
+        guis.add(cb);
     }
 
     void update()
@@ -1476,17 +1474,21 @@ namespace UI
 
         if(!guis.empty())
         {
+            guicb *cb = guis.last();
+            gui g;
+            g.cb = cb;
+            g.adjustscale();
+
             ui_cursor_type = 0;
             guilayoutpass = 1;
-            //loopv(guis) guis[i].cb->gui(guis[i], true);
-            guis.last().cb->gui(guis.last(), true);
-            guilayoutpass = ui_cursor_type = 0;
+            cb->gui(g, true);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-            //loopvrev(guis) guis[i].cb->gui(guis[i], false);
-            guis.last().cb->gui(guis.last(), false);
+            ui_cursor_type = 0;
+            guilayoutpass = 0;
+            cb->gui(g, false);
 
             glDisable(GL_BLEND);
         }
