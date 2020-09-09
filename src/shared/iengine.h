@@ -561,9 +561,9 @@ enum { EDITORFOCUSED = 1, EDITORUSED, EDITORFOREVER, EDITORREADONLY };
 
 struct Texture;
 struct VSlot;
-struct guient
+struct GuiContext
 {
-    virtual ~guient() {}
+    virtual ~GuiContext() {}
 
     virtual void start(int starttime, int *tab = NULL, bool allowinput = true, bool wantstitle = true, bool wantsbgfx = true) = 0;
     virtual void end() = 0;
@@ -618,11 +618,11 @@ struct guient
     virtual int prefabpreview(const char *prefab, const vec &color, float sizescale, bool overlaid = false) { return 0; }
 };
 
-struct guicb
+struct GuiBase
 {
-    virtual ~guicb() {}
+    virtual ~GuiBase() {}
     static int starttime() { extern int totalmillis; return totalmillis; }
-    virtual void gui(guient &g, bool firstpass) = 0;
+    virtual void gui(GuiContext &g, bool firstpass) = 0;
 };
 
 extern char *ui_skin_texture, *ui_skin_border_texture, *ui_overlay_texture, *ui_exit_texture, *ui_hover_texture;
@@ -638,7 +638,7 @@ namespace UI
     extern void render();
     extern bool active(bool pass = true);
     extern bool hit(bool on, bool act);
-    extern void addcb(guicb *cb);
+    extern void addcb(GuiBase *cb);
     extern void limitscale(float scale);
     extern editor *geteditor(const char *name, int mode, const char *init = NULL, const char *parent = NULL);
     extern void editorline(editor *e, const char *str, int limit = -1);

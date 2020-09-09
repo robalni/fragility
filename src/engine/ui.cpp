@@ -85,7 +85,7 @@ static char *statusstr = NULL, *tooltipstr = NULL, *tooltip = NULL;
 static int lasttooltip = 0, statuswidth = 0, tooltipwidth = 0;
 
 #include "textedit.h"
-struct gui : guient
+struct Gc : GuiContext
 {
     struct list { int parent, w, h, springs, curspring, mouse[2]; };
 
@@ -224,7 +224,7 @@ struct gui : guient
         }
         if(color) tcolor = color;
         if(!name) name = intstr(tpos);
-        gui::pushfont("super");
+        Gc::pushfont("super");
         int width = 0, height = 0;
         text_bounds(name, width, height, 0, 0, -1, TEXT_NO_INDENT);
         if(guilayoutpass)
@@ -258,12 +258,12 @@ struct gui : guient
             text_(name, x1 + ui_size_spacer / 2, y1 + ui_size_spacer / 8, tcolor, alpha);
         }
         tx += width + ui_size_spacer * 3 / 2;
-        gui::popfont();
+        Gc::popfont();
     }
 
     void uibuttons()
     {
-        gui::pushfont("super");
+        Gc::pushfont("super");
         tx += FONTH + ui_size_spacer * 2; // acts like a tab
         if(!guilayoutpass)
         {
@@ -290,7 +290,7 @@ struct gui : guient
             if(!exittex) exittex = textureload(ui_exit_texture, 3, true, false); \
             uibtn(exittex, cleargui(1));
         }
-        gui::popfont();
+        Gc::popfont();
     }
 
     bool ishorizontal() const { return curdepth&1; }
@@ -1206,7 +1206,6 @@ struct gui : guient
     static Texture *skintex, *skinbordertex, *overlaytex, *exittex, *hovertex;
 
     vec uiorigin, uiscale;
-    guicb *cb;
 
     static float basescale, maxscale;
     static bool passthrough;
@@ -1225,7 +1224,7 @@ struct gui : guient
     {
         if(!guilayoutpass) activechildpath = nextactivechildpath;
         fontdepth = 0;
-        gui::pushfont("default");
+        Gc::pushfont("default");
         basescale = ui_scale;
         if(guilayoutpass)
             uiscale.x = uiscale.y = uiscale.z = ui_time_scale ? min(basescale * (totalmillis - starttime) / float(ui_time_scale), basescale) : basescale;
@@ -1284,13 +1283,13 @@ struct gui : guient
         {
             if(ui_status_line && statusstr && *statusstr)
             {
-                gui::pushfont("reduced");
+                Gc::pushfont("reduced");
                 int width = 0, height = 0, tw = min(statuswidth ? statuswidth : (ui_width_status ? ui_width_status : -1), int(screenw * (1 / uiscale.y)) - FONTH * 4);
                 text_bounds(statusstr, width, height, 0, 0, tw, TEXT_CENTERED|TEXT_NO_INDENT);
                 int w = width+FONTW*2, h = height+FONTH/2, x1 = -w/2, y1 = ui_size_spacer, x2 = x1 + w, y2 = y1 + h;
                 if(hasbgfx) skin(x1, y1, x2, y2, ui_color_background, ui_blend_background, ui_color_border, ui_blend_border);
                 draw_text(statusstr, x1+FONTW, y1+FONTH/4, 255, 255, 255, 255, TEXT_CENTERED|TEXT_NO_INDENT, -1, tw);
-                gui::popfont();
+                Gc::popfont();
             }
             if(needsinput) uibuttons();
             if(!passthrough && fieldmode != FIELDKEY && (ui_tooltips || tooltipforce) && tooltipstr && *tooltipstr)
@@ -1303,7 +1302,7 @@ struct gui : guient
                 }
                 if(tooltipforce || totalmillis-lasttooltip >= ui_time_tooltip)
                 {
-                    gui::pushfont("little");
+                    Gc::pushfont("little");
                     int width, height, tw = min(tooltipwidth ? tooltipwidth : (ui_width_tooltip ? ui_width_tooltip : -1), int(screenw * (1 / uiscale.y)) - FONTH * 4);
                     text_bounds(tooltipstr, width, height, 0, 0, tw, TEXT_NO_INDENT);
                     int w = width+FONTW*2, h = FONTH/2+height, x1 = hitx, y1 = hity-height-FONTH/2, x2 = x1+w, y2 = y1+h,
@@ -1311,7 +1310,7 @@ struct gui : guient
                     float blend = tooltipforce ? 1.f : (offset > 0 ? (offset < ui_fade_tooltip ? offset / float(ui_fade_tooltip) : 1.f) : 0.f);
                     skin(x1, y1, x2, y2, ui_color_tooltip, ui_blend_tooltip * blend, ui_color_tooltip_border, ui_blend_tooltip_border * blend, ui_skin_tooltip_border != 0);
                     draw_text(tooltip, x1+FONTW, y1+FONTH/4, 255, 255, 255, int(255*blend), TEXT_NO_INDENT, -1, tw);
-                    gui::popfont();
+                    Gc::popfont();
                 }
             }
             else
@@ -1321,26 +1320,26 @@ struct gui : guient
             }
         }
         poplist();
-        while(fontdepth) gui::popfont();
+        while(fontdepth) Gc::popfont();
     }
 };
 
-Texture *gui::skintex = NULL, *gui::skinbordertex, *gui::overlaytex = NULL, *gui::exittex = NULL, *gui::hovertex = NULL;
-TVARN(IDF_PERSIST|IDF_PRELOAD, ui_skin_texture, "textures/guiskin", gui::skintex, 0);
-TVARN(IDF_PERSIST|IDF_PRELOAD, ui_skin_border_texture, "textures/guiskinborder", gui::skinbordertex, 0);
-TVARN(IDF_PERSIST|IDF_PRELOAD, ui_overlay_texture, "textures/guioverlay", gui::overlaytex, 0);
-TVARN(IDF_PERSIST|IDF_PRELOAD, ui_exit_texture, "textures/guiexit", gui::exittex, 0);
-TVARN(IDF_PERSIST|IDF_PRELOAD, ui_hover_texture, "textures/guihover", gui::hovertex, 0);
+Texture *Gc::skintex = NULL, *Gc::skinbordertex, *Gc::overlaytex = NULL, *Gc::exittex = NULL, *Gc::hovertex = NULL;
+TVARN(IDF_PERSIST|IDF_PRELOAD, ui_skin_texture, "textures/guiskin", Gc::skintex, 0);
+TVARN(IDF_PERSIST|IDF_PRELOAD, ui_skin_border_texture, "textures/guiskinborder", Gc::skinbordertex, 0);
+TVARN(IDF_PERSIST|IDF_PRELOAD, ui_overlay_texture, "textures/guioverlay", Gc::overlaytex, 0);
+TVARN(IDF_PERSIST|IDF_PRELOAD, ui_exit_texture, "textures/guiexit", Gc::exittex, 0);
+TVARN(IDF_PERSIST|IDF_PRELOAD, ui_hover_texture, "textures/guihover", Gc::hovertex, 0);
 
-vector<gui::list> gui::lists;
-float gui::basescale, gui::maxscale = 1, gui::hitx, gui::hity;
-bool gui::passthrough, gui::hitfx = true, gui::cursorfx = true, gui::skinfx = true;
-int gui::curdepth, gui::fontdepth, gui::curlist, gui::xsize, gui::ysize, gui::curx, gui::cury, gui::mergelist, gui::mergedepth;
-int gui::ty, gui::tx, gui::tpos, *gui::tcurrent, gui::tcolor;
-vector<int> gui::curchildpath;
-vector<int> gui::activechildpath;
-vector<int> gui::nextactivechildpath;
-static vector<guicb *> guis;
+vector<Gc::list> Gc::lists;
+float Gc::basescale, Gc::maxscale = 1, Gc::hitx, Gc::hity;
+bool Gc::passthrough, Gc::hitfx = true, Gc::cursorfx = true, Gc::skinfx = true;
+int Gc::curdepth, Gc::fontdepth, Gc::curlist, Gc::xsize, Gc::ysize, Gc::curx, Gc::cury, Gc::mergelist, Gc::mergedepth;
+int Gc::ty, Gc::tx, Gc::tpos, *Gc::tcurrent, Gc::tcolor;
+vector<int> Gc::curchildpath;
+vector<int> Gc::activechildpath;
+vector<int> Gc::nextactivechildpath;
+static vector<GuiBase *> guis;
 
 namespace UI
 {
@@ -1389,8 +1388,8 @@ namespace UI
             case -1: mouse_action[0] |= (ui_action_on = isdown) ? GUI_DOWN : GUI_UP;
                 if(isdown)
                 {
-                    firstx = gui::hitx;
-                    firsty = gui::hity;
+                    firstx = Gc::hitx;
+                    firsty = Gc::hity;
                 }
                 if(active()) return true;
                 break;
@@ -1432,9 +1431,9 @@ namespace UI
     }
 
     bool active(bool pass) { return guis.length() && (!pass || needsinput); }
-    void limitscale(float scale) {  gui::maxscale = scale; }
+    void limitscale(float scale) {  Gc::maxscale = scale; }
 
-    void addcb(guicb *cb)
+    void addcb(GuiBase *cb)
     {
         guis.add(cb);
     }
@@ -1454,7 +1453,7 @@ namespace UI
         curtextscale = 1;
         if(ui_action_on) mouse_action[0] |= GUI_PRESSED;
 
-        gui::reset();
+        Gc::reset();
         guis.shrink(0);
 
         // call all places in the engine that may want to render a gui from here, they call addcb()
@@ -1474,21 +1473,19 @@ namespace UI
 
         if(!guis.empty())
         {
-            guicb *cb = guis.last();
-            gui g;
-            g.cb = cb;
+            Gc g;
             g.adjustscale();
 
             ui_cursor_type = 0;
             guilayoutpass = 1;
-            cb->gui(g, true);
+            guis.last()->gui(g, true);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
             ui_cursor_type = 0;
             guilayoutpass = 0;
-            cb->gui(g, false);
+            guis.last()->gui(g, false);
 
             glDisable(GL_BLEND);
         }
