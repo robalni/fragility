@@ -1433,9 +1433,9 @@ namespace UI
     bool active(bool pass) { return guis.length() && (!pass || needsinput); }
     void limitscale(float scale) {  Gc::maxscale = scale; }
 
-    void addcb(GuiBase *cb)
+    void addgui(GuiBase *gui)
     {
-        guis.add(cb);
+        guis.add(gui);
     }
 
     void update()
@@ -1456,7 +1456,7 @@ namespace UI
         Gc::reset();
         guis.shrink(0);
 
-        // call all places in the engine that may want to render a gui from here, they call addcb()
+        // call all places in the engine that may want to render a gui from here, they call addgui()
         if(progressing) menu_progress();
         else
         {

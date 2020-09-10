@@ -935,13 +935,13 @@ void menu_progress()
     { // it doesn't need to exist
         m->use_title = m->use_input = m->world = false;
         m->built_in = true;
-        UI::addcb(m);
+        UI::addgui(m);
     }
 }
 
 void menu_main()
 {
-    if(!menustack.empty()) UI::addcb(menustack.last());
+    if(!menustack.empty()) UI::addgui(menustack.last());
 }
 
 bool menuactive()

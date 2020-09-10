@@ -1003,7 +1003,7 @@ namespace hud
 
     void gamemenus()
     {
-        if(scoreson) UI::addcb(&sb);
+        if(scoreson) UI::addgui(&sb);
         if(game::player1.state == CS_DEAD) { if(scoreson) shownscores = true; }
         else shownscores = false;
     }

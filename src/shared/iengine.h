@@ -638,7 +638,7 @@ namespace UI
     extern void render();
     extern bool active(bool pass = true);
     extern bool hit(bool on, bool act);
-    extern void addcb(GuiBase *cb);
+    extern void addgui(GuiBase *gui);
     extern void limitscale(float scale);
     extern editor *geteditor(const char *name, int mode, const char *init = NULL, const char *parent = NULL);
     extern void editorline(editor *e, const char *str, int limit = -1);
