@@ -216,13 +216,12 @@ inline char *newstring(size_t l)                { return new char[l+1]; }
 inline char *newstring(const char *s, size_t l) { return copystring(newstring(l), s, l+1); }
 inline char *newstring(const char *s)           { if(!s) s = ""; size_t l = strlen(s); char *d = newstring(l); memcpy(d, s, l+1); return d; }
 
-// TODO: remove macros and replace them with actual for loops
-#define loopv(v)     for(decltype((v).size()) i = 0; i < (v).size(); i++)
-#define loopvj(v)    for(decltype((v).size()) j = 0; j < (v).size(); j++)
-#define loopvk(v)    for(decltype((v).size()) k = 0; k < (v).size(); k++)
-#define loopvrev(v)  for(ssize_t i = (v).size() - 1; i >= 0; i--)
-#define loopvjrev(v) for(ssize_t j = (v).size() - 1; j >= 0; j--)
-#define loopvkrev(v) for(ssize_t k = (v).size() - 1; k >= 0; k--)
+#define loopv(v)     for(decltype((v).size()) i = 0; i<(v).size(); i++)
+#define loopvj(v)    for(decltype((v).size()) j = 0; j<(v).size(); j++)
+#define loopvk(v)    for(decltype((v).size()) k = 0; k<(v).size(); k++)
+#define loopvrev(v)  for(int i = (v).size() - 1; i >= 0; i--)
+#define loopvjrev(v) for(int j = (v).size() - 1; j >= 0; j--)
+#define loopvkrev(v) for(int k = (v).size() - 1; k >= 0; k--)
 
 template <class T>
 struct databuf
