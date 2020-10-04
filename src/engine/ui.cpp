@@ -1475,7 +1475,6 @@ namespace UI
         if(progressing) menu_progress();
         else
         {
-            menu_texture();
             hud::gamemenus();
             menu_main();
         }
