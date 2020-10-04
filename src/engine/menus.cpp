@@ -5,10 +5,10 @@ VAR(0, guipasses, 1, -1, -1);
 
 struct menu;
 
-static guient *cgui = NULL;
+static GuiContext *cgui = NULL;
 static menu *cmenu = NULL;
 
-struct menu : guicb
+struct menu : GuiBase
 {
     char *name, *header;
     uint *contents, *init_script;
@@ -17,7 +17,7 @@ struct menu : guicb
 
     menu() : name(NULL), header(NULL), contents(NULL), init_script(NULL), passes(0), menu_tab(0), menu_start(0), world(false), use_input(true), use_title(true), use_bg_fx(true), built_in(false), keep(NULL) {}
 
-    void gui(guient &g, bool firstpass)
+    void gui(GuiContext &g, bool firstpass)
     {
         cgui = &g;
         cmenu = this;
@@ -844,7 +844,7 @@ static vector<change> needsapply;
 
 static struct applymenu : menu
 {
-    void gui(guient &g, bool firstpass)
+    void gui(GuiContext &g, bool firstpass)
     {
         if(menustack.empty()) return;
         g.start(menu_start, NULL, true);
@@ -935,13 +935,13 @@ void menu_progress()
     { // it doesn't need to exist
         m->use_title = m->use_input = m->world = false;
         m->built_in = true;
-        UI::addcb(m);
+        UI::addgui(m);
     }
 }
 
 void menu_main()
 {
-    if(!menustack.empty()) UI::addcb(menustack.last());
+    if(!menustack.empty()) UI::addgui(menustack.last());
 }
 
 bool menuactive()
@@ -953,7 +953,7 @@ ICOMMAND(0, menustacklen, "", (void), intret(menustack.length()));
 
 void guiirc(const char *s, int width, int height)
 {
-    extern bool ircgui(guient *g, const char *s, int width, int height);
+    extern bool ircgui(GuiContext *g, const char *s, int width, int height);
     if(cgui)
     {
         if(!ircgui(cgui, s, width > 0 ? width : 100, height > 0 ? height : 25) && shouldclearmenu) clearlater = true;
@@ -963,7 +963,7 @@ ICOMMAND(0, ircgui, "sii", (char *s, int *w, int *h), guiirc(s, *w, *h));
 
 void ui_console(int width, int height, const char *init)
 {
-    extern bool consolegui(guient *g, int width, int height, const char *init, int &update);
+    extern bool consolegui(GuiContext *g, int width, int height, const char *init, int &update);
     static int consoleupdate = -1;
     if(cgui)
     {
@@ -979,7 +979,7 @@ ICOMMAND(0, consolegui, "iis", (int *w, int *h, char *i), ui_console(*w, *h, i))
 void ui_texture_list()
 {
     if(!cgui) return;
-    void ui_texture_list_(guient &);
+    void ui_texture_list_(GuiContext &);
     ui_texture_list_(*cgui);
 }
 COMMAND(0, ui_texture_list, "");

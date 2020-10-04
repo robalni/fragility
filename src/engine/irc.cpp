@@ -1050,7 +1050,7 @@ void irccmd(ircnet *n, ircchan *c, char *s)
     }
 }
 
-bool ircchangui(guient *g, ircnet *n, ircchan *c, bool tab, int width, int height)
+bool ircchangui(GuiContext *g, ircnet *n, ircchan *c, bool tab, int width, int height)
 {
     if(tab)
     {
@@ -1078,7 +1078,7 @@ bool ircchangui(guient *g, ircnet *n, ircchan *c, bool tab, int width, int heigh
     return true;
 }
 
-bool ircnetgui(guient *g, ircnet *n, bool tab, int width, int height)
+bool ircnetgui(GuiContext *g, ircnet *n, bool tab, int width, int height)
 {
     if(tab)
     {
@@ -1113,7 +1113,7 @@ bool ircnetgui(guient *g, ircnet *n, bool tab, int width, int height)
 }
 
 static const char * const ircstates[IRC_MAX] = { "\fowaiting", "\froffline", "\foconnecting", "\fynegotiating", "\fgonline", "\foquitting" };
-bool ircgui(guient *g, const char *s, int width, int height)
+bool ircgui(GuiContext *g, const char *s, int width, int height)
 {
     g->strut(width-6);
     if(s && *s)

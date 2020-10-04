@@ -183,7 +183,7 @@ namespace hud
                 }
                 else if(within && !scoresoff) { menulastpress = 0; return; }
             }
-            if(!scoreson && on) menustart = guicb::starttime();
+            if(!scoreson && on) menustart = GuiBase::starttime();
             scoresoff = !onauto;
             scoreson = on;
             if(m_play(game::gamemode) && m_play(game::gamemode) && interm)
@@ -286,7 +286,7 @@ namespace hud
         return verstr;
     }
 
-    void renderscoreboard(guient &g, bool firstpass)
+    void renderscoreboard(GuiContext &g, bool firstpass)
     {
         g.start(menustart, NULL, false, false, scorebgfx != 0);
         int numgroups = groupplayers();
@@ -991,9 +991,9 @@ namespace hud
         return sy;
     }
 
-    struct scoreboard : guicb
+    struct scoreboard : GuiBase
     {
-        void gui(guient &g, bool firstpass)
+        void gui(GuiContext &g, bool firstpass)
         {
             renderscoreboard(g, firstpass);
         }
@@ -1003,7 +1003,7 @@ namespace hud
 
     void gamemenus()
     {
-        if(scoreson) UI::addcb(&sb);
+        if(scoreson) UI::addgui(&sb);
         if(game::player1.state == CS_DEAD) { if(scoreson) shownscores = true; }
         else shownscores = false;
     }

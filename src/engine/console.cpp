@@ -990,7 +990,7 @@ bool numlocked()
 ICOMMAND(0, getnumlock, "", (), intret(numlockon ? 1 : 0));
 
 #ifndef STANDALONE
-bool consolegui(guient *g, int width, int height, const char *init, int &update)
+bool consolegui(GuiContext *g, int width, int height, const char *init, int &update)
 {
     g->strut(width-6);
     if(!conlines.empty() && (update < 0 || conlines[0].reftime > update))

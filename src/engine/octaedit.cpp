@@ -2811,7 +2811,7 @@ static int lastthumbnail = 0;
 static const char *rotations[6] = { "none", "90 degrees", "180 degrees", "270 degrees", "flip x", "flip y" };
 static int menupage, menutex = -1, rolltex = -1;
 
-void ui_texture_list_(guient &g)
+void ui_texture_list_(GuiContext &g)
 {
     bool menuon = true;
     extern VSlot dummyvslot;
