@@ -2125,7 +2125,7 @@ void drawviewtype(int targtype)
 
 bool hasnoview()
 {
-    return client::waiting()>0;
+    return client::waiting()>0 || progressing;
 }
 
 void gl_drawframe()
