@@ -1,5 +1,5 @@
-#include <string>
 #include "game.h"
+
 namespace weapons
 {
     VAR(IDF_PERSIST, autoreloading, 0, 2, 4); // 0 = never, 1 = when empty, 2 = weapons that don't add a full clip, 3 = always (+1 zooming weaps too)
@@ -20,7 +20,7 @@ namespace weapons
     vector<int> weaplist;
     void buildweaplist(const char *str)
     {
-        vector<std::string> list;
+        vector<String> list;
         explodelist(str, list);
         weaplist.shrink(0);
         loopv(list)

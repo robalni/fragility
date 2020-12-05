@@ -1,7 +1,6 @@
 // command.cpp: implements the parsing and execution of a tiny script language which
 // is largely backwards compatible with the quake console language.
 
-#include <string>
 #include "engine.h"
 
 bool interactive = false;
@@ -2762,11 +2761,11 @@ void explodelist(const char *s, vector<char *> &elems, int limit)
         elems.add(newstring(start, end-start));
 }
 
-void explodelist(const char *s, vector<std::string> &elems, int limit)
+void explodelist(const char *s, vector<String> &elems, int limit)
 {
     const char *start, *end;
     while((limit < 0 || elems.size() < limit) && parselist(s, start, end))
-        elems.add(std::string(start, end-start));
+        elems.add(String(start, end-start));
 }
 
 char *indexlist(const char *s, int pos)
@@ -3482,14 +3481,14 @@ char *string_highlight_list(const char *s, const char *words, const char *before
 {
     if(!s || !*s) return newstring("");
 
-    vector<std::string> word_list;
+    vector<String> word_list;
     explodelist(words, word_list);
     size_t s_len = strlen(s);
     char *highlight_mask = new char[s_len];  // This is a byte array, not string
     memset(highlight_mask, 0, s_len);
 
     // First mark the characters that will be highlighted.
-    for(const std::string &word : word_list)
+    for(const String &word : word_list)
     {
         for(size_t s_i = 0; s_i < s_len; s_i++)
         {
@@ -3502,7 +3501,7 @@ char *string_highlight_list(const char *s, const char *words, const char *before
         }
     }
 
-    std::string replaced;
+    String replaced;
     replaced.reserve(s_len);
     char prev_m = 0;
     // Now do the replacing using highlight_mask to see where the highlights start and end.
@@ -3635,7 +3634,7 @@ void getvarinfo(int n, int types, int notypes, int flags, int noflags, char *str
     }
     if(str && *str)
     {
-        vector<std::string> words;
+        vector<String> words;
         explodelist(str, words);
         static char *laststr = NULL;
         if(ids[1].empty() || !laststr || strcmp(str, laststr))
@@ -3644,7 +3643,7 @@ void getvarinfo(int n, int types, int notypes, int flags, int noflags, char *str
             loopv(ids[0])
             {
                 bool matches = true;
-                for (const std::string &word : words)
+                for (const String &word : words)
                 {
                     if(!rigcasestr(ids[0][i]->name, word.c_str()))
                     {

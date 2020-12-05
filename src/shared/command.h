@@ -2,7 +2,6 @@
 #define COMMAND_H
 // script binding functionality
 
-#include <string>
 enum { VAL_NULL = 0, VAL_INT, VAL_FLOAT, VAL_STR, VAL_ANY, VAL_CODE, VAL_MACRO, VAL_IDENT };
 
 enum
@@ -360,7 +359,7 @@ extern char *parsetext(const char *&p);
  * \limit[in] is the maximum number of elements to add.
  */
 extern void explodelist(const char *s, vector<char *> &elems, int limit = -1);
-extern void explodelist(const char *s, vector<std::string> &elems, int limit = -1);
+extern void explodelist(const char *s, vector<String> &elems, int limit = -1);
 
 extern int listlen(const char *s);
 extern char *indexlist(const char *s, int pos);

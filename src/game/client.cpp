@@ -1,4 +1,3 @@
-#include <string>
 #include "game.h"
 
 namespace client
@@ -395,7 +394,7 @@ namespace client
 
     void updateserversort()
     {
-        vector<std::string> styles;
+        vector<String> styles;
         explodelist(serversort, styles, SINFO_MAX);
         serversortstyles.clear();
         loopv(styles) serversortstyles.emplace_back(parseint(styles[i].c_str()));
@@ -467,7 +466,7 @@ namespace client
         vector<int> items;
         if(list && *list)
         {
-            vector<std::string> chunk;
+            vector<String> chunk;
             explodelist(list, chunk);
             loopv(chunk)
             {
@@ -491,7 +490,7 @@ namespace client
         vector<int> items;
         if(list && *list)
         {
-            vector<std::string> chunk;
+            vector<String> chunk;
             explodelist(list, chunk);
             loopv(chunk)
             {
@@ -1558,7 +1557,7 @@ namespace client
 
         if(muts_str && *muts_str)
         {
-            vector<std::string> muts_vec;
+            vector<String> muts_vec;
             char *begin = muts_str;
             char *end = NULL;
             // Split the muts string on ' ' and '-' into muts_vec.
@@ -1584,7 +1583,7 @@ namespace client
                 }
             }
 
-            for(const std::string &mut : muts_vec)
+            for(const String &mut : muts_vec)
             {
                 if(isnumeric(*mut.c_str()))
                 {

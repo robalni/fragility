@@ -3,6 +3,7 @@
 #ifndef _TOOLS_H
 #define _TOOLS_H
 #include <utility>
+#include <new>
 
 #ifdef NULL
 #undef NULL
@@ -1487,6 +1488,137 @@ template <class T, int SIZE> struct reversequeue : queue<T, SIZE>
 
     T &operator[](int offset) { return queue<T, SIZE>::added(offset); }
     const T &operator[](int offset) const { return queue<T, SIZE>::added(offset); }
+};
+
+struct String
+{
+#define STRING_MIN_ALLOC 8
+    char *buf;
+    int alen;  // Allocated length
+    int slen;  // Length of string, without '\0'
+
+    String() : buf(NULL), alen(0), slen(0) {}
+
+    String(const char *str, int maxlen)
+    {
+        slen = strlen(str);
+        if(maxlen < slen) slen = maxlen;
+        alen = STRING_MIN_ALLOC;
+        while(alen < slen + 1) alen *= 2;
+        buf = new char[alen];
+        memcpy(buf, str, slen);
+        buf[slen] = '\0';
+    }
+
+    String(const char *str)
+    {
+        slen = strlen(str);
+        alen = STRING_MIN_ALLOC;
+        while(alen < slen + 1) alen *= 2;
+        buf = new char[alen];
+        memcpy(buf, str, slen + 1);
+    }
+
+    String(const String &other)
+    {
+        slen = other.slen;
+        alen = other.alen;
+        buf = new char[other.alen];
+        memcpy(buf, other.buf, other.slen + 1);
+    }
+
+    ~String()
+    {
+        delete[] buf;
+        buf = NULL;
+        alen = 0;
+        slen = 0;
+    }
+
+    void reserve(int len)
+    {
+        int req_alen = slen + len + 1;
+        if(alen >= req_alen) return;
+        int orig_alen = alen;
+        if(alen == 0) alen = STRING_MIN_ALLOC;
+        while(alen < req_alen) alen *= 2;
+        if(alen > orig_alen)
+        {
+            char *new_buf = new char[alen];
+            if(slen > 0) memcpy(new_buf, buf, slen + 1);
+            delete[] buf;
+            buf = new_buf;
+        }
+    }
+
+    void clear()
+    {
+        delete[] buf;
+        buf = NULL;
+        slen = 0;
+        alen = 0;
+    }
+
+    String &operator=(const String &other)
+    {
+        clear();
+        slen = other.slen;
+        alen = other.alen;
+        buf = new char[other.alen];
+        memcpy(buf, other.buf, other.slen + 1);
+        return *this;
+    }
+
+    String &operator=(const char *s)
+    {
+        clear();
+        slen = strlen(s);
+        reserve(slen);
+        memcpy(buf, s, slen + 1);
+        return *this;
+    }
+
+    String& operator+=(const String &other)
+    {
+        reserve(other.slen);
+        memcpy(buf + slen, other.buf, other.slen);
+        slen += other.slen;
+        return *this;
+    }
+
+    String &operator+=(const char *s)
+    {
+        int l = strlen(s);
+        reserve(l);
+        memcpy(buf + slen, s, l + 1);
+        slen += l;
+        return *this;
+    }
+
+    String &operator+=(char c)
+    {
+        reserve(1);
+        buf[slen] = c;
+        slen++;
+        buf[slen] = '\0';
+        return *this;
+    }
+
+    char operator[](int i) const { ASSERT(i < slen); return buf[i]; }
+
+    bool operator==(const String &other) const
+    {
+        return slen == other.slen && strcmp(buf, other.buf) == 0;
+    }
+
+    bool operator!=(const String &other) const
+    {
+        return !(*this == other);
+    }
+
+    char *c_str() const { return buf; }
+    size_t length() const { return slen; }
+    bool empty() const { return slen == 0; }
 };
 
 #if defined(WIN32) && !defined(__GNUC__)

@@ -1,6 +1,4 @@
 // console.cpp: the console buffer, its display, and command line control
-#include <string>
-
 #include "engine.h"
 #include "game.h"
 
@@ -800,7 +798,7 @@ void complete(char *s, size_t s_size, const char *cmdprefix)
             // replace the input with the playername
             if (fits) 
             {
-                std::string formatted_playername = game::colourname(game::players[i]);
+                String formatted_playername = game::colourname(game::players[i]);
 
                 // remove everything to the @ from s
                 int s_len = strlen(s);

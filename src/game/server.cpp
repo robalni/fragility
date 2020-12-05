@@ -23,8 +23,6 @@
 // for use on the master server should first seek permission from the Blue Nebula Team,
 // each modification must be approved and will be done on a case-by-case basis.
 
-#include <string>
-
 #define GAMESERVER 1
 #include "game.h"
 #include "errno.h"
@@ -1057,12 +1055,12 @@ namespace server
             if(!map || !*map) map = choosemap(suggest, mode, muts, G(rotatemaps), true);
             else if(strchr(map, ' '))
             {
-                static std::string defaultmap;
-                vector<std::string> maps;
+                static String defaultmap;
+                vector<String> maps;
                 explodelist(map, maps);
                 if(*sv_previousmaps)
                 {
-                    vector<std::string> prev;
+                    vector<String> prev;
                     explodelist(sv_previousmaps, prev);
                     loopvj(prev) loopvrev(maps) if(prev[j] != maps[i])
                     {
@@ -3374,10 +3372,10 @@ namespace server
 
         if(!demoplayback && m_play(gamemode) && numclients())
         {
-            std::string buf = smapname;
+            String buf = smapname;
             if(*sv_previousmaps && G(maphistory))
             {
-                vector<std::string> prev;
+                vector<String> prev;
                 explodelist(sv_previousmaps, prev);
                 loopvrev(prev) if(prev[i] == smapname)
                 {

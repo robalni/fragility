@@ -1,6 +1,4 @@
 // world.cpp: core map management stuff
-#include <string>
-
 #include "engine.h"
 
 mapz hdr;
@@ -773,7 +771,7 @@ int newentity(int type, const attrvector &attrs)
 
 void entattrs(const char *str, attrvector &attrs)
 {
-    static vector<std::string> buf;
+    static vector<String> buf;
     explodelist(str, buf, MAXENTATTRS);
     attrs.setsize(0);
     attrs.add(0, buf.size());
