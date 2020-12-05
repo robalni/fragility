@@ -1,4 +1,3 @@
-#include <vector>
 #include <string>
 #include "engine.h"
 
@@ -709,7 +708,7 @@ float key_widthf(const char *str)
 {
     const char *keyn = str;
     if(*str == '=') keyn = gettklp(++str);
-    std::vector<std::string> list;
+    vector<std::string> list;
     explodelist(keyn, list);
     float width = 0, scale = curfont->maxh*curfont->scale/float(curfont->defaulth)*curtextscale*textkeyimagescale;
     loopv(list)
@@ -736,7 +735,7 @@ static int draw_key(Texture *&tex, const char *str, float sx, float sy)
     Texture *oldtex = tex;
     const char *keyn = str;
     if(*str == '=') keyn = gettklp(++str);
-    std::vector<std::string> list;
+    vector<std::string> list;
     explodelist(keyn, list);
     float width = 0, sh = curfont->maxh*curfont->scale/float(curfont->defaulth)*curtextscale, h = sh*textkeyimagescale;
     loopv(list)

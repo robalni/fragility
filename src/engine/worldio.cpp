@@ -1,4 +1,3 @@
-#include <vector>
 // worldio.cpp: loading & saving of maps
 
 #include "engine.h"

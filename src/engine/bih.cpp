@@ -1,4 +1,3 @@
-#include <vector>
 #include "engine.h"
 
 extern vec hitsurface;

@@ -1,4 +1,3 @@
-#include <vector>
 #include <string>
 #include "game.h"
 namespace weapons
@@ -21,7 +20,7 @@ namespace weapons
     vector<int> weaplist;
     void buildweaplist(const char *str)
     {
-        std::vector<std::string> list;
+        vector<std::string> list;
         explodelist(str, list);
         weaplist.shrink(0);
         loopv(list)

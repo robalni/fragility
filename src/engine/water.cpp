@@ -1,4 +1,3 @@
-#include <vector>
 #include "engine.h"
 
 VARF(IDF_PERSIST, waterreflect, 0, 1, 1, { cleanreflections(); preloadwatershaders(); });

@@ -1810,7 +1810,7 @@ template<class MDL> struct skelcommands : modelcommands<MDL, struct MDL::skelmes
 
         part *p = (part *)MDL::loading->parts.last();
 
-        std::vector<std::string> bonestrs;
+        vector<std::string> bonestrs;
         explodelist(maskstr, bonestrs);
         vector<ushort> bonemask;
         loopv(bonestrs)

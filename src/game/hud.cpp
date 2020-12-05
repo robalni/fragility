@@ -1,4 +1,3 @@
-#include <vector>
 #include "game.h"
 
 namespace hud

@@ -1,7 +1,6 @@
 // command.cpp: implements the parsing and execution of a tiny script language which
 // is largely backwards compatible with the quake console language.
 
-#include <vector>
 #include <string>
 #include "engine.h"
 
@@ -2763,11 +2762,11 @@ void explodelist(const char *s, vector<char *> &elems, int limit)
         elems.add(newstring(start, end-start));
 }
 
-void explodelist(const char *s, std::vector<std::string> &elems, int limit)
+void explodelist(const char *s, vector<std::string> &elems, int limit)
 {
     const char *start, *end;
     while((limit < 0 || elems.size() < limit) && parselist(s, start, end))
-        elems.emplace_back(std::string(start, end-start));
+        elems.add(std::string(start, end-start));
 }
 
 char *indexlist(const char *s, int pos)
@@ -3483,7 +3482,7 @@ char *string_highlight_list(const char *s, const char *words, const char *before
 {
     if(!s || !*s) return newstring("");
 
-    std::vector<std::string> word_list;
+    vector<std::string> word_list;
     explodelist(words, word_list);
     size_t s_len = strlen(s);
     char *highlight_mask = new char[s_len];  // This is a byte array, not string
@@ -3636,7 +3635,7 @@ void getvarinfo(int n, int types, int notypes, int flags, int noflags, char *str
     }
     if(str && *str)
     {
-        std::vector<std::string> words;
+        vector<std::string> words;
         explodelist(str, words);
         static char *laststr = NULL;
         if(ids[1].empty() || !laststr || strcmp(str, laststr))

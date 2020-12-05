@@ -1,6 +1,4 @@
-#include <vector>
 #include <string>
-#include <vector>
 #define GAMEWORLD 1
 #include "game.h"
 
@@ -409,7 +407,7 @@ namespace game
     void vanitybuild(gameent *d)
     {
         if(!*d->vanity) return; // not needed
-        std::vector<std::string> vanitylist;
+        vector<std::string> vanitylist;
         explodelist(d->vanity, vanitylist);
         loopv(vanitylist) if(!vanitylist[i].empty())
             loopvk(vanities) if(!strcmp(vanities[k].ref, vanitylist[i].c_str()))
@@ -3415,7 +3413,7 @@ namespace game
             int idx = third == 1 && (d->state == CS_DEAD || d->state == CS_WAITING) && d->headless && !nogore && headlessmodels ? 3 : third;
             if(d->vitems.empty())
             {
-                std::vector<std::string> vanitylist;
+                vector<std::string> vanitylist;
                 explodelist(d->vanity, vanitylist);
                 loopv(vanitylist) if(!vanitylist[i].empty())
                     loopvk(vanities) if(vanitylist[i] == vanities[k].ref)

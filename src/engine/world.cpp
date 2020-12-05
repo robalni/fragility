@@ -1,6 +1,5 @@
 // world.cpp: core map management stuff
 #include <string>
-#include <vector>
 
 #include "engine.h"
 
@@ -774,7 +773,7 @@ int newentity(int type, const attrvector &attrs)
 
 void entattrs(const char *str, attrvector &attrs)
 {
-    static std::vector<std::string> buf;
+    static vector<std::string> buf;
     explodelist(str, buf, MAXENTATTRS);
     attrs.setsize(0);
     attrs.add(0, buf.size());
