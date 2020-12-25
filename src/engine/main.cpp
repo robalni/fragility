@@ -1100,7 +1100,6 @@ int main(int argc, char **argv)
     if(initscript) execute(initscript, true);
 
     capslockon = capslocked();
-    numlockon = numlocked();
     ignoremousemotion();
 
     localconnect(false);
