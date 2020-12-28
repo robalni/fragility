@@ -873,16 +873,16 @@ namespace physics
                         if(onfloor)
                         {
                             d->o.z += space*m;
-                            if(collide(d, dir))
+                            if(collide(d))
                             {
                                 d->o.z += space*n-space*m;
-                                if(!collide(d, dir) || hitplayer) vault = true;
+                                if(!collide(d) || hitplayer) vault = true;
                             }
                         }
                         else
                         {
                             d->o.z += space*n;
-                            if(!collide(d, dir) || hitplayer) vault = true;
+                            if(!collide(d) || hitplayer) vault = true;
                         }
                         d->o = oldpos;
                     }
