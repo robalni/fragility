@@ -71,11 +71,10 @@ if(BUILD_CLIENT)
     find_package(SDL2 REQUIRED)
     find_package(SDL2_image REQUIRED)
     find_package(SDL2_mixer REQUIRED)
+    # OpenGL may be imported with pkg-config on Unix, but that doesn't work on macOS
+    set(OpenGL_GL_PREFERENCE LEGACY)
+    find_package(OpenGL REQUIRED)
 endif()
-
-# OpenGL may be imported with pkg-config on Unix, but that doesn't work on macOS
-set(OpenGL_GL_PREFERENCE LEGACY)
-find_package(OpenGL REQUIRED)
 
 # platform specific code
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
