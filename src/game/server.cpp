@@ -3796,7 +3796,7 @@ namespace server
             sendstring(ci->handle, p);
             sendstring(allow ? gethostip(ci->clientnum) : "*", p); // TODO proto 231
             sendstring(allow ? gethostip(ci->clientnum) : "*", p);
-            ci->version.put(p);
+            ci->version.put(p, true);
         }
     }
 

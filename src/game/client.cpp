@@ -1816,7 +1816,7 @@ namespace client
         sendstring(hash, p);
         sendstring(authconnect ? accountname : "", p);
 
-        game::player1.version.put(p);
+        game::player1.version.put(p, true);
 
         sendclientpacket(p.finalize(), 1);
     }

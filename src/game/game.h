@@ -503,8 +503,9 @@ struct verinfo
         getstring(text, p); gpuversion = newstring(text);
     }
 
+    // `filter` is used to avoid sending some information to the server or other clients.
     template <class T>
-    void put(T &p)
+    void put(T &p, bool filter)
     {
         putint(p, major);
         putint(p, minor);
@@ -512,13 +513,13 @@ struct verinfo
         putint(p, game);
         putint(p, platform);
         putint(p, arch);
-        putint(p, gpuglver);
-        putint(p, gpuglslver);
-        putint(p, crc);
+        putint(p, filter ? 0 : gpuglver);
+        putint(p, filter ? 0 : gpuglslver);
+        putint(p, filter ? 0 : crc);
         sendstring(branch ? branch : "", p);
-        sendstring(gpuvendor ? gpuvendor : "", p);
-        sendstring(gpurenderer ? gpurenderer : "", p);
-        sendstring(gpuversion ? gpuversion : "", p);
+        sendstring(gpuvendor && !filter ? gpuvendor : "", p);
+        sendstring(gpurenderer && !filter ? gpurenderer : "", p);
+        sendstring(gpuversion && !filter ? gpuversion : "", p);
     }
 
     void grab(verinfo &v)
