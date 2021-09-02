@@ -696,6 +696,65 @@ namespace hud
         result(list.getbuf());
     });
 
+    static const char *modetextures[] =
+    {
+        "", modeeditingtex, modedeathmatchtex, modecapturetex,
+        modedefendtex, modebombertex, moderacetex,
+    };
+    static void getmodetex(int *modeidx)
+    {
+        unsigned mode = *modeidx;
+        if(mode < sizeof(modetextures) / sizeof(*modetextures))
+        {
+            result(modetextures[mode]);
+        }
+        else
+        {
+            result("");
+        }
+    }
+    COMMAND(0, getmodetex, "i");
+
+    static const char *muttextures[] =
+    {
+        modemultitex,    modeffatex,       modecooptex,      modeinstatex,
+        modemedievaltex, modekaboomtex,    modedueltex,      modesurvivortex,
+        modeclassictex,  modeonslaughttex, modefreestyletex, modevampiretex,
+        moderesizetex,   modehardtex,      modebasictex,
+    };
+    static const char *mutgsptextures[][3] =
+    {
+        { "",                  "",                   "" },
+        { "",                  "",                   "" },
+        { modegladiatortex,    modeoldschooltex,     "" },
+        { modecapturequicktex, modecapturedefendtex, modecaptureprotecttex },
+        { modedefendquicktex,  modedefendkingtex,    "" },
+        { modebomberholdtex,   modebomberbaskettex,  modebomberattacktex },
+        { moderacetimedtex,    moderaceendurancetex, moderacegauntlettex },
+    };
+    static void getmuttex(int *modeidx, int *mutidx)
+    {
+        unsigned mode = *modeidx;
+        unsigned mut = *mutidx;
+        if(mut < sizeof(muttextures) / sizeof(*muttextures))
+        {
+            // Non-mode-specific mutator. Same for all modes.
+            result(muttextures[mut]);
+        }
+        else if(mut >= G_M_GSP && mut < G_M_NUM)
+        {
+            // Mode-specific mutator.
+            unsigned gsp = mut - G_M_GSP;
+            if(mode < sizeof(mutgsptextures) / sizeof(*mutgsptextures) && gsp < sizeof(*mutgsptextures) / sizeof(**mutgsptextures))
+            {
+                result(mutgsptextures[*modeidx][gsp]);
+            }
+            else result("");
+        }
+        else result("");
+    }
+    COMMAND(0, getmuttex, "ii");
+
     const char* get_system_time_formatted()
     {
         return gettime(currenttime, "%H:%M");
