@@ -91,8 +91,8 @@ namespace game
     VAR(IDF_PERSIST, firstpersonmodel, 0, 2, 2);
     VAR(IDF_PERSIST, firstpersonfov, 90, 100, 150);
     FVAR(IDF_PERSIST, firstpersonblend, 0, 1, 1);
-    FVAR(IDF_PERSIST, firstpersondepth, 0, 0.25f, 1);
-    FVAR(IDF_PERSIST, firstpersonbodydepth, 0, 0.65f, 1);
+    FVAR(IDF_PERSIST, firstpersondepth, 0, 1, 1);
+    FVAR(IDF_PERSIST, firstpersonbodydepth, 0, 1, 1);
 
     FVAR(IDF_PERSIST, firstpersonbodydist, -10, 0, 10);
     FVAR(IDF_PERSIST, firstpersonbodyside, -10, 0, 10);

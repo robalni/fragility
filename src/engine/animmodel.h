@@ -2,7 +2,7 @@
 #define ANIMMODEL_H
 VARF(IDF_PERSIST, envmapmodels, 0, 1, 1, preloadmodelshaders(true));
 VARF(IDF_PERSIST, bumpmodels, 0, 1, 1, preloadmodelshaders(true));
-VAR(IDF_PERSIST, fullbrightmodels, 0, 0, 200);
+VAR(IDF_PERSIST, fullbrightmodels, 0, 100, 200);
 
 struct animmodel : model
 {
