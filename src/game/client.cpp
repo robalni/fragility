@@ -1518,7 +1518,7 @@ namespace client
             {"oldscool",   1 << G_M_GSP2,       1 << G_DEATHMATCH},
             {"quick",      1 << G_M_GSP1,       1 << G_CAPTURE},
             {"defend",     1 << G_M_GSP2,       1 << G_CAPTURE},
-            {"protect",    1 << G_M_GSP3,       1 << G_CAPTURE},
+            {"hold",       1 << G_M_GSP3,       1 << G_CAPTURE},
             {"quick",      1 << G_M_GSP1,       1 << G_DEFEND},
             {"king",       1 << G_M_GSP2,       1 << G_DEFEND},
             {"hold",       1 << G_M_GSP1,       1 << G_BOMBER},

@@ -70,7 +70,7 @@ struct captureservmode : capturestate, servmode
                 (flags[i].floorpos = ci->floorpos).z += (enttype[AFFINITY].radius/4)+1;
         if(G(capturethreshold) > 0 && oldpos.dist(newpos) >= G(capturethreshold))
             dropaffinity(ci, oldpos, vec(ci->vel).add(ci->falling));
-        if(!m_ctf_protect(gamemode, mutators)) loopv(flags) if(flags[i].owner == ci->clientnum)
+        if(!m_ctf_hold(gamemode, mutators)) loopv(flags) if(flags[i].owner == ci->clientnum)
         {
             flag &r = flags[i]; // held flag
             loopvk(flags)
@@ -102,7 +102,7 @@ struct captureservmode : capturestate, servmode
         flag &f = flags[i];
         if(f.owner >= 0 || (f.team == ci->team && (m_ctf_defend(gamemode, mutators) || (m_ctf_quick(gamemode, mutators) && !f.droptime)))) return;
         if(f.lastowner == ci->clientnum && f.droptime && gamemillis-f.droptime <= G(capturepickupdelay)) return;
-        if(!m_ctf_protect(gamemode, mutators) && f.team != ci->team && f.lastowner == ci->clientnum && f.returntime + G(captureretakedelay) >= gamemillis) return;
+        if(!m_ctf_hold(gamemode, mutators) && f.team != ci->team && f.lastowner == ci->clientnum && f.returntime + G(captureretakedelay) >= gamemillis) return;
         if(m_ctf_quick(gamemode, mutators) && f.team == ci->team)
         {
             capturestate::returnaffinity(i, gamemillis);
@@ -162,10 +162,10 @@ struct captureservmode : capturestate, servmode
         loopv(flags)
         {
             flag &f = flags[i];
-            if(m_ctf_protect(gamemode, mutators) && f.owner >= 0)
+            if(m_ctf_hold(gamemode, mutators) && f.owner >= 0)
             {
                 clientinfo *ci = (clientinfo *)getinfo(f.owner);
-                if(f.team != ci->team && f.taketime && gamemillis-f.taketime >= G(captureprotectdelay))
+                if(f.team != ci->team && f.taketime && gamemillis-f.taketime >= G(captureholddelay))
                 {
                     capturestate::returnaffinity(i, gamemillis);
                     givepoints(ci, G(capturepoints), m_points(gamemode, mutators), false);

@@ -84,8 +84,8 @@ gametypes gametype[] = {
             (1<<G_M_MULTI)|(1<<G_M_COOP)|(1<<G_M_INSTA)|(1<<G_M_DUEL)|(1<<G_M_SURVIVOR)|(1<<G_M_CLASSIC)|(1<<G_M_MEDIEVAL)|(1<<G_M_KABOOM)|(1<<G_M_ONSLAUGHT)|(1<<G_M_FREESTYLE)|(1<<G_M_VAMPIRE)|(1<<G_M_RESIZE)|(1<<G_M_HARD)|(1<<G_M_BASIC)|(1<<G_M_GSP2),
             (1<<G_M_MULTI)|(1<<G_M_COOP)|(1<<G_M_INSTA)|(1<<G_M_DUEL)|(1<<G_M_SURVIVOR)|(1<<G_M_CLASSIC)|(1<<G_M_MEDIEVAL)|(1<<G_M_KABOOM)|(1<<G_M_ONSLAUGHT)|(1<<G_M_FREESTYLE)|(1<<G_M_VAMPIRE)|(1<<G_M_RESIZE)|(1<<G_M_HARD)|(1<<G_M_BASIC)|(1<<G_M_GSP3)
         },
-        "capture-the-flag", "capture", { "quick", "defend", "protect" },
-        "take the enemy flag and return it to the base to score", { "dropped flags instantly return to base", "dropped flags must be defended until they reset", "protect the flag and hold the enemy flag to score" },
+        "capture-the-flag", "capture", { "quick", "defend", "hold" },
+        "take the enemy flag and return it to the base to score", { "dropped flags instantly return to base", "dropped flags must be defended until they reset", "hold the enemy flag to score" },
     },
     {
         G_DEFEND, 0, 0,
@@ -259,7 +259,7 @@ extern mutstypes mutstype[];
 
 #define m_ctf_quick(a,b)    (m_capture(a) && m_gsp1(a, b))
 #define m_ctf_defend(a,b)   (m_capture(a) && m_gsp2(a, b))
-#define m_ctf_protect(a,b)  (m_capture(a) && m_gsp3(a, b))
+#define m_ctf_hold(a,b)     (m_capture(a) && m_gsp3(a, b))
 
 #define m_dac_quick(a,b)    (m_defend(a) && m_gsp1(a, b))
 #define m_dac_king(a,b)     (m_defend(a) && m_gsp2(a, b))

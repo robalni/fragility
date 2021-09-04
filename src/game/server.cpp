@@ -1383,7 +1383,7 @@ namespace server
         if(type == 3 || type == 4) concatstring(mdname, ": ");
         if(type == 2 || type == 3 || type == 4 || type == 5)
         {
-            if((type == 4 || type == 5) && m_ctf_protect(mode, muts)) concatstring(mdname, gametype[mode].gsd[2]);
+            if((type == 4 || type == 5) && m_ctf_hold(mode, muts)) concatstring(mdname, gametype[mode].gsd[2]);
             else if((type == 4 || type == 5) && m_dac_king(mode, muts)) concatstring(mdname, gametype[mode].gsd[1]);
             else if((type == 4 || type == 5) && m_bb_hold(mode, muts)) concatstring(mdname, gametype[mode].gsd[0]);
             else if((type == 4 || type == 5) && m_bb_attack(mode, muts)) concatstring(mdname, gametype[mode].gsd[2]);
@@ -1404,7 +1404,7 @@ namespace server
         if(mutid < 0) return "";
         if(type == 4 || type == 5)
         {
-            if(m_ctf_protect(mode, muts)) return "";
+            if(m_ctf_hold(mode, muts)) return "";
             else if(m_dac_king(mode, muts)) return "";
             else if(m_bb_hold(mode, muts) || m_bb_attack(mode, muts)) return "";
             else if(m_ra_timed(mode, muts) || m_ra_gauntlet(mode, muts)) return "";

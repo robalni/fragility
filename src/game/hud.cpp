@@ -577,7 +577,7 @@ namespace hud
     TVAR(IDF_PERSIST, modecapturetex, "<grey>textures/modes/capture", 3);
     TVAR(IDF_PERSIST, modecapturequicktex, "<grey>textures/modes/capturequick", 3);
     TVAR(IDF_PERSIST, modecapturedefendtex, "<grey>textures/modes/capturedefend", 3);
-    TVAR(IDF_PERSIST, modecaptureprotecttex, "<grey>textures/modes/captureprotect", 3);
+    TVAR(IDF_PERSIST, modecaptureholdtex, "<grey>textures/modes/capturehold", 3);
 
     TVAR(IDF_PERSIST, modedefendtex, "<grey>textures/modes/defend", 3);
     TVAR(IDF_PERSIST, modedefendquicktex, "<grey>textures/modes/defendquick", 3);
@@ -616,7 +616,7 @@ namespace hud
         { \
             if(m_ctf_quick(g, m)) ADDMODE(modecapturequicktex) \
             else if(m_ctf_defend(g, m)) ADDMODE(modecapturedefendtex) \
-            else if(m_ctf_protect(g, m)) ADDMODE(modecaptureprotecttex) \
+            else if(m_ctf_hold(g, m)) ADDMODE(modecaptureholdtex) \
             else ADDMODE(modecapturetex) \
         } \
         else if(m_defend(g)) \
@@ -727,7 +727,7 @@ namespace hud
         { "",                  "",                   "" },
         { "",                  "",                   "" },
         { modegladiatortex,    modeoldschooltex,     "" },
-        { modecapturequicktex, modecapturedefendtex, modecaptureprotecttex },
+        { modecapturequicktex, modecapturedefendtex, modecaptureholdtex },
         { modedefendquicktex,  modedefendkingtex,    "" },
         { modebomberholdtex,   modebomberbaskettex,  modebomberattacktex },
         { moderacetimedtex,    moderaceendurancetex, moderacegauntlettex },

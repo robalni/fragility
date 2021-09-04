@@ -306,7 +306,7 @@ GVAR(IDF_GAMEMOD, captureresetfloor, 0, 0, 2); // if tossed, reset to last floor
 GVAR(IDF_GAMEMOD, captureresetstore, 0, 2, 15);
 GVAR(IDF_GAMEMOD, captureresetdelay, 0, 30000, VAR_MAX);
 GVAR(IDF_GAMEMOD, capturedefenddelay, 0, 10000, VAR_MAX);
-GVAR(IDF_GAMEMOD, captureprotectdelay, 0, 15000, VAR_MAX);
+GVAR(IDF_GAMEMOD, captureholddelay, 0, 15000, VAR_MAX);
 GVAR(IDF_GAMEMOD, capturepickupdelay, 500, 2500, VAR_MAX);
 GFVAR(IDF_GAMEMOD, capturecarryspeed, 0, 0.9f, FVAR_MAX);
 GFVAR(IDF_GAMEMOD, capturedropheight, 0, 8, FVAR_MAX);
