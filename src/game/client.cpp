@@ -1515,7 +1515,7 @@ namespace client
             {"hard",       1 << G_M_HARD,       G_ALL},
             {"basic",      1 << G_M_BASIC,      G_ALL},
             {"gladiator",  1 << G_M_GSP1,       1 << G_DEATHMATCH},
-            {"oldscool",   1 << G_M_GSP2,       1 << G_DEATHMATCH},
+            {"oldschool",  1 << G_M_GSP2,       1 << G_DEATHMATCH},
             {"quick",      1 << G_M_GSP1,       1 << G_CAPTURE},
             {"defend",     1 << G_M_GSP2,       1 << G_CAPTURE},
             {"hold",       1 << G_M_GSP3,       1 << G_CAPTURE},
@@ -1591,19 +1591,37 @@ namespace client
                 }
                 else
                 {
-                    bool found_one = false;
-                    for(auto possible_mut : mut_names)
+                    int n_found = 0;
+                    size_t found_i = 0;
+                    for(size_t i = 0; i < sizeof(mut_names) / sizeof(mut_names[0]); i++)
                     {
-                        if(strcmp(possible_mut.name, mut.c_str()) == 0 && (1 << nextmode) & possible_mut.modes)
+                        auto &possible_mut = mut_names[i];
+                        // Does the mutator name start with specified value?
+                        // Then it is a candidate.
+                        if(strncmp(possible_mut.name, mut.c_str(), mut.length()) == 0 && (1 << nextmode) & possible_mut.modes)
                         {
-                            nextmuts |= possible_mut.val;
-                            found_one = true;
-                            break;
+                            n_found++;
+                            found_i = i;
+                            // Does the mutator name equal specified value?
+                            // Then this choose this one and skip the other ones.
+                            if(strcmp(possible_mut.name, mut.c_str()) == 0)
+                            {
+                                break;
+                            }
                         }
                     }
-                    if(!found_one)
+                    if(n_found == 1)
+                    {
+                        nextmuts |= mut_names[found_i].val;
+                    }
+                    else if(n_found == 0)
                     {
                         conoutft(CON_MESG, "\frmutator \"%s\" not found or incompatible with mode \"%s\"", mut.c_str(), mode_str);
+                        return;
+                    }
+                    else
+                    {
+                        conoutft(CON_MESG, "\frmutator \"%s\" is ambiguous", mut.c_str());
                         return;
                     }
                 }
