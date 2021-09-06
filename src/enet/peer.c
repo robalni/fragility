@@ -61,6 +61,10 @@ enet_peer_throttle_configure (ENetPeer * peer, enet_uint32 interval, enet_uint32
 int
 enet_peer_throttle (ENetPeer * peer, enet_uint32 rtt)
 {
+    // Throttling has been disabled because it causes extrem lag when playing
+    // on servers with low RTT.
+    return 0;
+
     if (peer -> lastRoundTripTime <= peer -> lastRoundTripTimeVariance)
     {
         peer -> packetThrottle = peer -> packetThrottleLimit;
