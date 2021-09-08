@@ -3518,7 +3518,14 @@ namespace client
                 default: break;
             }
         }
-        return strcmp(a->name, b->name);
+        // If everything else is equal, we still want the servers to always
+        // have the same order so they don't change place in the server browser
+        // too often.  Therefore as a last try we compare something that will
+        // always be different in the same way.
+        bool reverse = false;
+        retsw(a->address.host, b->address.host, false);
+        retsw(a->address.port, b->address.port, false);
+        return 0;
     }
 
     void parsepacketclient(int chan, packetbuf &p)  // processes any updates from the server
