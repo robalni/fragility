@@ -730,7 +730,6 @@ namespace ai
         conoutf("loaded %d waypoints from %s", numwp, wptname);
 
         if(!cleanwaypoints()) clearwpcache();
-        game::specreset();
         return true;
     }
     ICOMMAND(0, loadwaypoints, "s", (char *mname), if(!(identflags&IDF_WORLD)) getwaypoints(true, mname));
