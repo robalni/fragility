@@ -124,6 +124,13 @@ namespace capture
                 {
                     hasflags.add(i);
                     if(f.team == game::focus->team) ownflag = true;
+                    if(m_ctf_hold(game::gamemode, game::mutators) && f.taketime && f.owner && f.owner->team != f.team)
+                    {
+                        int wait = captureholddelay - (lastmillis - f.taketime);
+                        pushfont("default");
+                        ty += draw_textf("Capturing in \fs\fzgy%s\fS", tx, ty, int(FONTW*hud::noticepadx), int(FONTH*hud::noticepady), tr, tg, tb, int(255*blend), TEXT_CENTERED, -1, -1, 1, timestr(wait));
+                        popfont();
+                    }
                 }
                 if(canpickup(game::focus, i, true)) pickup.add(i);
                 if(f.team == game::focus->team)
