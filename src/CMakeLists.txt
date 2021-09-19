@@ -78,17 +78,12 @@ endif()
 
 # platform specific code
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    set(BIN_SUFFIX "_linux")
 elseif(APPLE)
-    set(BIN_SUFFIX "_osx")
-
     # TODO: fix genkey on macOS
     set(BUILD_GENKEY OFF)
 elseif(MINGW)
-    set(BIN_SUFFIX "_windows")
 else()
     message(WARNING "Unknown build platform")
-    set(BIN_SUFFIX "_unknown")
 endif()
 
 # import enet
