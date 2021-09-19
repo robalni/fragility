@@ -5,7 +5,7 @@
   <project_license>Zlib and CC-BY-SA-3.0+</project_license>
   <description>
     <p>
-      Blue Nebula is a fun-filled new take on the first person arena shooter,
+      Fragility is a fun-filled new take on the first person arena shooter,
       built as a total conversion of Cube Engine 2, which lends itself toward
       a balanced gameplay, with a general theme of agility in a variety of
       environments. It features a unique parkour movement system.
@@ -32,6 +32,6 @@
       <caption>Overlooking friendly fire on the map cutec</caption>
     </screenshot>
   </screenshots>
-  <developer_name>Blue Nebula Team</developer_name>
+  <developer_name>Fragility Team</developer_name>
   <url type="bugtracker">https://go.blue-nebula.org/issues</url>
 </component>

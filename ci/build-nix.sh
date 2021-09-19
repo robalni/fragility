@@ -18,7 +18,7 @@ else
     NPROC=$(nproc)
 fi
 
-BUILD_DIR=$(mktemp -d -p "$TEMP_BASE" blue-nebula-build-XXXXXX)
+BUILD_DIR=$(mktemp -d -p "$TEMP_BASE" fragility-build-XXXXXX)
 
 cleanup () {
     if [ -d "$BUILD_DIR" ]; then

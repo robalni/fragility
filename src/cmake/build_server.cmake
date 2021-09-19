@@ -61,7 +61,7 @@ if(BUILD_SERVER)
     endif()
 
     # add the server executable and link it to enet
-    add_blue_nebula_executable(${APPNAME}_server${BIN_SUFFIX} ${server_sources})
+    add_fragility_executable(${APPNAME}_server${BIN_SUFFIX} ${server_sources})
 
     # server only depends on enet
     target_link_libraries(${APPNAME}_server${BIN_SUFFIX} ${server_deps})

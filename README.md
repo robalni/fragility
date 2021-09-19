@@ -1,6 +1,6 @@
-# Blue Nebula
+# Fragility
 
-**Blue Nebula** is a fork of [Red Eclipse 1](https://redeclipse.net). While the *Red Eclipse* team have moved their game on to another engine for their latest release, 2.0, this also meant a total conversion of the gameplay, in our opinion sacrificing some of the best aspects.
+**Fragility** is a fork of [Red Eclipse 1](https://redeclipse.net) (via a fork called Blue Nebula). While the *Red Eclipse* team have moved their game on to another engine for their latest release, 2.0, this also meant a total conversion of the gameplay, in our opinion sacrificing some of the best aspects.
 
 Therefore, a group of eager community members have started to fork off *Red Eclipse* from the last 1.x series release, setting up the necessary infrastructure to (re-)establish a community around *Red Eclipse* 1.5+.
 
@@ -24,11 +24,11 @@ This project is still very young. We provide an official chatroom on the [freeno
 Please do not hesitate to get in touch with us!
 
 
-## Current state of Blue Nebula
+## Current state of Fragility
 
 We already provide our own [master server](https://github.com/TheAssassin/python-masterserver) (which also re-hosts the entries on the Red Eclipse master server) to which many more Blue Nebula servers are connected than to the Red Eclipse one. Check out our online server browser, [Blueflare](https://blueflare.assassinate-you.net).
 
-Right now we are working on creating downloadable binaries, installers etc., as a first step in our journey to a standalone **Blue Nebula** game.
+Right now we are working on creating downloadable binaries, installers etc., as a first step in our journey to a standalone **Fragility** game.
 
 
 -------

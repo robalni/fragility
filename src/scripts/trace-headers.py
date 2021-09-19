@@ -103,7 +103,7 @@ def main():
 
     if not files:
         print("Usage:", sys.argv[0], "file [file...] [-mycompilerflag]", file=sys.stderr)
-        print("Note: this tool is supposed to run from Blue Nebula src/ directory")
+        print("Note: this tool is supposed to run from Fragility src/ directory")
         return 1
 
     for file in files:

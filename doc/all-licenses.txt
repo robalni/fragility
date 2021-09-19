@@ -5,11 +5,12 @@ Copyright: Omitted
 License: Omitted
 
 Files: *
-Copyright: 2020, Blue Nebula Team, and 2009-2017, Red Eclipse Team
+Copyright: 2021, Fragility Team, 2020, Blue Nebula Team, and 2009-2017, Red Eclipse Team
 License: CC-BY-SA-3.0+
 
 Files: src/*
-Copyright: 2020, Blue Nebula Team
+Copyright: 2021, Fragility Team
+           2020, Blue Nebula Team
            2009-2017, Quinton Reeves, Lee Salzman
            2001-2017, Wouter van Oortmerssen, Lee Salzman, Mike Dysart,
            Robert Pointon, Quinton Reeves

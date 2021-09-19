@@ -3,7 +3,7 @@
 set -e
 set -x
 
-BUILD_DIR=$(mktemp -d blue-nebula-build-XXXXXX)
+BUILD_DIR=$(mktemp -d fragility-build-XXXXXX)
 
 cleanup () {
     if [ -d "$BUILD_DIR" ]; then

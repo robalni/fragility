@@ -110,7 +110,7 @@ endif()
 
 # most executables share some of their configuration
 # therefore we define our own function to add and configure them
-function(add_blue_nebula_executable target)
+function(add_fragility_executable target)
     add_executable(${target} ${ARGN})
 
     set_target_properties(${target} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin")
@@ -131,12 +131,12 @@ endfunction()
 
 function(add_windows_rc_file target)
     if(MINGW OR WIN32)
-        target_sources(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/blue-nebula.rc)
+        target_sources(${target} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/fragility.rc)
     endif()
 endfunction()
 
 # APPNAME is the name of the executable -- determines the executable names and is also needed in configure_file below
-set(APPNAME "blue-nebula")
+set(APPNAME "fragility")
 
 # the specific applications configuration is a bit complex, so it's been split into three separate CMake files
 include(cmake/build_client.cmake)
@@ -146,7 +146,7 @@ include(cmake/build_genkey.cmake)
 # install config directory with the cubescript files (containing the menu definitions etc.)
 install(
     DIRECTORY ${PROJECT_SOURCE_DIR}/config
-    DESTINATION share/blue-nebula
+    DESTINATION share/fragility
 )
 
 # install config for data files
@@ -156,7 +156,7 @@ if(SKIP_INSTALL_DATA)
 else()
     install(
         DIRECTORY ${PROJECT_SOURCE_DIR}/data
-        DESTINATION share/blue-nebula
+        DESTINATION share/fragility
         PATTERN ".git*" EXCLUDE
     )
 endif()
