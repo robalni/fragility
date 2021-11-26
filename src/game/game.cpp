@@ -351,9 +351,6 @@ namespace game
     ICOMMAND(0, getintermission, "", (), intret(gs_intermission(gamestate) ? 1 : 0));
     ICOMMAND(0, getgamestate, "", (), intret(gamestate));
 
-    const char *gametitle() { return connected() ? server::gamename(gamemode, mutators) : "ready"; }
-    const char *gametext() { return connected() ? mapname : "not connected"; }
-
     void vanityreset()
     {
         loopvrev(vanities) vanities.remove(i);

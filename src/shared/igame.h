@@ -115,8 +115,6 @@ namespace game
     extern void project(int w, int h);
     extern void recomputecamera(int w, int h);
     extern int localplayers();
-    extern const char *gametitle();
-    extern const char *gametext();
     extern int numanims();
     extern void findanims(const char *pattern, vector<int> &anims);
     extern void render();

@@ -711,7 +711,6 @@ extern void replace_cube_texture(cube &c, int oldtex, int newtex);
 extern void load_sky(char *basename);
 
 // main
-extern void setcaption(const char *text = "", const char *text2 = "");
 extern int colorpos, curfps, bestfps, worstfps, bestfpsdiff, worstfpsdiff, maxfps;
 
 // editing

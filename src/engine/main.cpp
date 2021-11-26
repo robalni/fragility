@@ -2,20 +2,6 @@
 #include "engine.h"
 #include <signal.h>
 
-string caption = "";
-
-void setcaption(const char *text, const char *text2)
-{
-    static string prevtext = "", prevtext2 = "";
-    if(strcmp(text, prevtext) || strcmp(text2, prevtext2))
-    {
-        copystring(prevtext, text);
-        copystring(prevtext2, text2);
-        formatstring(caption, "%s v%s-%s%d-%s (%s)%s%s%s%s", versionname, versionstring, versionplatname, versionarch, versionbranch, versionrelease, text[0] ? ": " : "", text, text2[0] ? " - " : "", text2);
-        if(screen) SDL_SetWindowTitle(screen, caption);
-    }
-}
-
 int keyrepeatmask = 0, textinputmask = 0;
 Uint32 textinputtime = 0;
 VAR(0, textinputfilter, 0, 5, 1000);
@@ -374,7 +360,9 @@ void setupscreen()
             SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, config&2 ? 1 : 0);
             SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, config&2 ? fsaa : 0);
         }
-        screen = SDL_CreateWindow(caption, winx, winy, winw, winh, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS | flags);
+        string window_title;
+        formatstring(window_title, "%s %s", versionname, versionstring);
+        screen = SDL_CreateWindow(window_title, winx, winy, winw, winh, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_MOUSE_FOCUS | flags);
         if(!screen) continue;
 
     #ifdef __APPLE__
@@ -1034,7 +1022,6 @@ int main(int argc, char **argv)
     if(SDL_Init(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_AUDIO) < 0) fatal("error initialising SDL: %s", SDL_GetError());
 
     conoutf("loading video..");
-    setcaption("please wait..");
     SDL_SetHint(SDL_HINT_GRAB_KEYBOARD, "0");
     SDL_SetHint(SDL_HINT_VIDEO_ALLOW_SCREENSAVER, "0");
     setupscreen();
@@ -1175,7 +1162,6 @@ int main(int argc, char **argv)
                 setfvar("progressamt", 0.f);
                 setfvar("progresspart", 0.f);
             }
-            setcaption(game::gametitle(), game::gametext());
         }
     }
 
