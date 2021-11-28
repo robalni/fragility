@@ -1567,7 +1567,7 @@ namespace client
                 {
                     if(*end == ' ' || *end == '-' || *end == '\0')
                     {
-                        muts_vec.add({begin, end - begin});
+                        muts_vec.add({begin, int(end - begin)});
                         begin = end;
                         end = NULL;
                     }
