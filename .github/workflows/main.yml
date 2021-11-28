@@ -7,8 +7,8 @@ env:
 
 jobs:
   build-nix:
-    name: Ubuntu xenial (x86_64) debug
-    runs-on: ubuntu-16.04
+    name: Ubuntu (x86_64) debug
+    runs-on: ubuntu-latest
     env:
       BUILD_TYPE: Debug
     steps:
@@ -19,8 +19,8 @@ jobs:
         run: bash -xe ci/build-nix.sh
 
   build-nix-release:
-    name: Ubuntu xenial (x86_64) release
-    runs-on: ubuntu-16.04
+    name: Ubuntu (x86_64) release
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -30,7 +30,7 @@ jobs:
 
   macos-release:
     name: macOS (x86_64) release
-    runs-on: macos-10.15
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -39,8 +39,8 @@ jobs:
         run: bash -xe ci/build-mac.sh
 
   windows-release-cross:
-    name: Windows (x86_64) release (crossbuild from Ubuntu bionic x86_64, MinGW-w64)
-    runs-on: ubuntu-18.04
+    name: Windows (x86_64) release (crossbuild from Ubuntu x86_64, MinGW-w64)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
