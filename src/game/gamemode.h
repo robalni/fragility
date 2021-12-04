@@ -85,7 +85,7 @@ gametypes gametype[] = {
             (1<<G_M_MULTI)|(1<<G_M_COOP)|(1<<G_M_INSTA)|(1<<G_M_DUEL)|(1<<G_M_SURVIVOR)|(1<<G_M_CLASSIC)|(1<<G_M_MEDIEVAL)|(1<<G_M_KABOOM)|(1<<G_M_ONSLAUGHT)|(1<<G_M_FREESTYLE)|(1<<G_M_VAMPIRE)|(1<<G_M_RESIZE)|(1<<G_M_HARD)|(1<<G_M_BASIC)|(1<<G_M_GSP3)
         },
         "capture-the-flag", "capture", { "quick", "defend", "hold" },
-        "take the enemy flag and return it to the base to score", { "dropped flags instantly return to base", "dropped flags must be defended until they reset", "hold the enemy flag to score" },
+        "take the enemy flag and return it to the base to score", { "dropped flags return to base when touched", "dropped flags return to base after a delay", "hold the enemy flag to score" },
     },
     {
         G_DEFEND, 0, 0,
@@ -107,7 +107,7 @@ gametypes gametype[] = {
             (1<<G_M_MULTI)|(1<<G_M_COOP)|(1<<G_M_INSTA)|(1<<G_M_CLASSIC)|(1<<G_M_MEDIEVAL)|(1<<G_M_KABOOM)|(1<<G_M_ONSLAUGHT)|(1<<G_M_FREESTYLE)|(1<<G_M_VAMPIRE)|(1<<G_M_RESIZE)|(1<<G_M_HARD)|(1<<G_M_BASIC)|(1<<G_M_GSP2)|(1<<G_M_GSP3)
         },
         "bomber-ball", "bomber", { "hold", "basket", "attack" },
-        "carry the bomb into the enemy goal to score", { "hold the bomb as long as possible to score", "throw the bomb into the enemy goal to score", "teams take turns attacking and defending" },
+        "carry the bomb into the enemy goal to score", { "hold the bomb as long as possible to score", "throw the bomb into the enemy goal to get more points", "teams take turns attacking and defending" },
     },
     {
         G_RACE, (1<<G_F_GSP), 0,
@@ -160,7 +160,7 @@ mutstypes mutstype[] = {
     {
         G_M_SURVIVOR, (1<<G_M_SURVIVOR),
         (1<<G_M_MULTI)|(1<<G_M_FFA)|(1<<G_M_COOP)|(1<<G_M_INSTA)|(1<<G_M_SURVIVOR)|(1<<G_M_CLASSIC)|(1<<G_M_MEDIEVAL)|(1<<G_M_KABOOM)|(1<<G_M_ONSLAUGHT)|(1<<G_M_FREESTYLE)|(1<<G_M_VAMPIRE)|(1<<G_M_RESIZE)|(1<<G_M_HARD)|(1<<G_M_BASIC)|(1<<G_M_GSP1)|(1<<G_M_GSP2)|(1<<G_M_GSP3),
-        "survivor", "players battle to determine the winner"
+        "survivor", "last player or team to survive wins"
     },
     {
         G_M_CLASSIC,    (1<<G_M_CLASSIC),
