@@ -132,7 +132,7 @@ namespace game
     VARF(IDF_PERSIST, intermmode, 0, 1, 1, specreset()); // 0 = float, 1 = tv
 
     VAR(IDF_PERSIST, followdead, 0, 1, 2); // 0 = never, 1 = in all but duel/survivor, 2 = always
-    VAR(IDF_PERSIST, followthirdperson, 0, 1, 1);
+    VAR(IDF_PERSIST, followthirdperson, 0, 0, 1);
     VAR(IDF_PERSIST, followaiming, 0, 1, 3); // 0 = don't aim, &1 = aim in thirdperson, &2 = aim in first person
     FVAR(IDF_PERSIST, followblend, 0, 1, 1);
     FVAR(IDF_PERSIST, followdist, FVAR_NONZERO, 10, FVAR_MAX);

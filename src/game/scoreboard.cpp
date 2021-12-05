@@ -53,7 +53,7 @@ namespace hud
     VAR(IDF_PERSIST, scoreconnecting, 0, 0, 1);
     VAR(IDF_PERSIST, scorehostinfo, 0, 0, 1);
     VAR(IDF_PERSIST, scoreipinfo, 0, 0, 1);
-    VAR(IDF_PERSIST, scoreverinfo, 0, 1, 1);
+    VAR(IDF_PERSIST, scoreverinfo, 0, 0, 1);
     VAR(IDF_PERSIST, scoreicons, 0, 1, 1);
     VAR(IDF_PERSIST|IDF_HEX, scorehilight, 0, 0xFFFFFF, 0xFFFFFF);
     VAR(IDF_PERSIST, scoredarken, 0, 1, 1);
