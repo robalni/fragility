@@ -1,4 +1,4 @@
 [submodule "data"]
 	path = data
-	url = s:git/gamedata
+	url = https://github.com/robalni/fragility-data
 	branch = master
