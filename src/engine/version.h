@@ -8,7 +8,7 @@
 #define VERSION_UNAME "fragility"
 #define VERSION_VNAME "FRAGILITY"
 #define VERSION_RELEASE "Sunrise Edition"
-#define VERSION_URL "https://www.robalni.org"
+#define VERSION_URL "https://www.robalni.org/fragility"
 #define VERSION_COPY "2009-2021"
 #define VERSION_DESC "A fun-filled new take on the first-person arena shooter, featuring a unique parkour system."
 
