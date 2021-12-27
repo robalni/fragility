@@ -382,9 +382,9 @@ namespace hud
                                                 uicenterlist(g, g.textf("Press \fs\fw\f{=3:waitmodeswitch}\fS to %s", 0xFFFFFF, NULL, 0, -1, false, NULL, 0xFFFFFF, game::tvmode() ? "interact" : "switch to TV"));
                                             /*
                                             if(m_loadout(game::gamemode, game::mutators))
-                                                uicenterlist(g, g.textf("Press \fs\fw\f{=showgui profile 2}\fS to \fs%s\fS loadout", 0xFFFFFF, NULL, 0, -1, false, NULL, 0xFFFFFF, game::player1.loadweap.empty() ? "\fzoyselect" : "change"));
+                                                uicenterlist(g, g.textf("Press \fs\fw\f{=show_ui profile 2}\fS to \fs%s\fS loadout", 0xFFFFFF, NULL, 0, -1, false, NULL, 0xFFFFFF, game::player1.loadweap.empty() ? "\fzoyselect" : "change"));
                                             if(m_play(game::gamemode) && m_team(game::gamemode, game::mutators))
-                                                uicenterlist(g, g.textf("Press \fs\fw\f{=showgui team}\fS to change teams", 0xFFFFFF, NULL, 0, -1, false, NULL, 0xFFFFFF));
+                                                uicenterlist(g, g.textf("Press \fs\fw\f{=show_ui team}\fS to change teams", 0xFFFFFF, NULL, 0, -1, false, NULL, 0xFFFFFF));
                                             */
                                         });
                                     }
