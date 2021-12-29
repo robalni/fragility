@@ -1713,21 +1713,27 @@ namespace hud
                     }
                 }
             }
+        }
 
-            if(game::player1.state == CS_SPECTATOR)
+        if(game::player1.state == CS_SPECTATOR && (gs_playing(game::gamestate) || game::gamestate == G_S_READYING))
+        {
+            pushfont("little");
+            if(!client::demoplayback)
             {
-                pushfont("little");
-                if(!client::demoplayback)
-                {
-                    ty += draw_textf("Press \fs\fw\f{=1:spectate 0}\fS to join the game", tx, ty, int(FONTW*noticepadx), int(FONTH*noticepady), tr, tg, tb, tf, TEXT_CENTERED, -1, tw, 1);
-                    if(m_play(game::gamemode) && m_team(game::gamemode, game::mutators) && shownotices >= 2)
-                        ty += draw_textf("Press \fs\fw\f{=1:show_ui team}\fS to join a team", tx, ty, int(FONTW*noticepadx), int(FONTH*noticepady), tr, tg, tb, tf, TEXT_CENTERED, -1, tw, 1);
-                }
+                ty += draw_textf("Press \fs\fw\f{=1:spectate 0}\fS to join the game", tx, ty, int(FONTW*noticepadx), int(FONTH*noticepady), tr, tg, tb, tf, TEXT_CENTERED, -1, tw, 1);
+                if(m_play(game::gamemode) && m_team(game::gamemode, game::mutators) && shownotices >= 2)
+                    ty += draw_textf("Press \fs\fw\f{=1:show_ui team}\fS to join a team", tx, ty, int(FONTW*noticepadx), int(FONTH*noticepady), tr, tg, tb, tf, TEXT_CENTERED, -1, tw, 1);
+            }
+            if(gs_playing(game::gamestate))
+            {
                 if(!m_edit(game::gamemode) && shownotices >= 2)
                     ty += draw_textf("Press \fs\fw\f{=1:specmodeswitch}\fS to %s", tx, ty, int(FONTW*noticepadx), int(FONTH*noticepady), tr, tg, tb, tf, TEXT_CENTERED, -1, tw, 1, game::tvmode() ? "interact" : "switch to TV");
-                popfont();
             }
+            popfont();
+        }
 
+        if(gs_playing(game::gamestate))
+        {
             if(m_edit(game::gamemode) && (game::focus->state != CS_EDITING || shownotices >= 4) && !client::demoplayback)
             {
                 pushfont("little");
