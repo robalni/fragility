@@ -24,7 +24,7 @@ SDL_cond *querycond, *resultcond;
 #define RESOLVERTHREADS 2
 #define RESOLVERLIMIT 3500
 
-int resolverloop(void * data)
+static int resolverloop(void *data)
 {
     resolverthread *rt = (resolverthread *)data;
     SDL_LockMutex(resolvermutex);
@@ -58,7 +58,7 @@ int resolverloop(void * data)
     return 0;
 }
 
-void resolverinit()
+static void resolverinit()
 {
     resolvermutex = SDL_CreateMutex();
     querycond = SDL_CreateCond();
@@ -75,7 +75,7 @@ void resolverinit()
     SDL_UnlockMutex(resolvermutex);
 }
 
-void resolverstop(resolverthread &rt)
+static void resolverstop(resolverthread &rt)
 {
     SDL_LockMutex(resolvermutex);
     if(rt.query)
@@ -90,7 +90,7 @@ void resolverstop(resolverthread &rt)
     SDL_UnlockMutex(resolvermutex);
 }
 
-void resolverclear()
+static void resolverclear()
 {
     if(resolverthreads.empty()) return;
 
@@ -105,7 +105,7 @@ void resolverclear()
     SDL_UnlockMutex(resolvermutex);
 }
 
-void resolverquery(const char *name)
+static void resolverquery(const char *name)
 {
     if(resolverthreads.empty()) resolverinit();
 
@@ -115,7 +115,7 @@ void resolverquery(const char *name)
     SDL_UnlockMutex(resolvermutex);
 }
 
-bool resolvercheck(const char **name, ENetAddress *address)
+static bool resolvercheck(const char **name, ENetAddress *address)
 {
     bool resolved = false;
     SDL_LockMutex(resolvermutex);
@@ -257,7 +257,7 @@ VAR(IDF_PERSIST, showserversortoptions, 0, 0, 1);
 VAR(IDF_PERSIST, serverdecay, 0, 20, VAR_MAX);
 VAR(0, serverwaiting, 1, serverinfo::WAITING, 0);
 
-void pingservers()
+static void pingservers()
 {
     if(pingsock == ENET_SOCKET_NULL)
     {
@@ -301,7 +301,7 @@ void pingservers()
     lastinfo = totalmillis;
 }
 
-void checkresolver()
+static void checkresolver()
 {
     int resolving = 0;
     loopv(servers)
@@ -336,7 +336,7 @@ void checkresolver()
 
 static int lastreset = 0;
 
-void checkpings()
+static void checkpings()
 {
     if(pingsock==ENET_SOCKET_NULL) return;
     enet_uint32 events = ENET_SOCKET_WAIT_RECEIVE;
@@ -392,7 +392,7 @@ void checkpings()
 
 static inline int serverinfocompare(serverinfo *a, serverinfo *b) { return client::servercompare(a, b) < 0; }
 
-void refreshservers()
+static void refreshservers()
 {
     static int lastrefresh = 0;
     if(lastrefresh == totalmillis) return;
@@ -411,7 +411,7 @@ void refreshservers()
 
 bool reqmaster = false;
 
-void clearservers()
+static void clearservers()
 {
     resolverclear();
     servers.deletecontents();
@@ -422,7 +422,7 @@ COMMAND(0, clearservers, "");
 
 #define RETRIEVELIMIT 20000
 
-void retrieveservers(vector<char> &data)
+static void retrieveservers(vector<char> &data)
 {
     ENetSocket sock = connectmaster(false);
     if(sock == ENET_SOCKET_NULL) return;
@@ -475,7 +475,7 @@ void retrieveservers(vector<char> &data)
     enet_socket_destroy(sock);
 }
 
-void sortservers()
+static void sortservers()
 {
     if(!sortedservers)
     {
@@ -488,7 +488,7 @@ COMMAND(0, sortservers, "");
 VAR(IDF_PERSIST, autosortservers, 0, 1, 1);
 VAR(0, pausesortservers, 0, 0, 1);
 
-void updatefrommaster()
+static void updatefrommaster()
 {
     pausesortservers = 0;
     vector<char> data;
@@ -506,7 +506,7 @@ void updatefrommaster()
 }
 COMMAND(0, updatefrommaster, "");
 
-void updateservers()
+static void updateservers()
 {
     if(!reqmaster) updatefrommaster();
     refreshservers();
