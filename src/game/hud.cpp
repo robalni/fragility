@@ -3614,33 +3614,33 @@ namespace hud
                 float a = min(float(totalmillis-abs(commandmillis))/float(commandfade), 1.f)*commandfadeamt;
                 if(commandmillis > 0) a = 1.f-a;
                 else a += (1.f-commandfadeamt);
-                loopi(3) if(a < colour[i]) colour[i] *= a;
+                loopi(3) if(a < colour[i]) colour[i] = a;
             }
             if(compassfade && (compassmillis > 0 || totalmillis-abs(compassmillis) <= compassfade))
             {
                 float a = min(float(totalmillis-abs(compassmillis))/float(compassfade), 1.f)*compassfadeamt;
                 if(compassmillis > 0) a = 1.f-a;
                 else a += (1.f-compassfadeamt);
-                loopi(3) if(a < colour[i]) colour[i] *= a;
+                loopi(3) if(a < colour[i]) colour[i] = a;
             }
             if(uifade && (uimillis > 0 || totalmillis-abs(uimillis) <= uifade))
             {
-                float n = min(float(totalmillis-abs(uimillis))/float(uifade), 1.f), a = n*uifadeamt;
+                float a = min(float(totalmillis-abs(uimillis))/float(uifade), 1.f)*uifadeamt;
                 if(uimillis > 0) a = 1.f-a;
                 else a += (1.f-uifadeamt);
-                loopi(3) if(a < colour[i]) colour[i] *= a;
+                loopi(3) if(a < colour[i]) colour[i] = a;
             }
             if(!noview)
             {
                 if(titlefade && (client::waiting() || lastmillis-game::maptime <= titlefade))
                 {
                     float a = !client::waiting() ? float(lastmillis-game::maptime)/float(titlefade) : 0.f;
-                    loopi(3) if(a < colour[i]) colour[i] *= a;
+                    loopi(3) if(a < colour[i]) colour[i] = a;
                 }
                 if(tvmodefade && game::tvmode())
                 {
                     float a = game::lasttvchg ? (lastmillis-game::lasttvchg <= tvmodefade ? float(lastmillis-game::lasttvchg)/float(tvmodefade) : 1.f) : 0.f;
-                    loopi(3) if(a < colour[i]) colour[i] *= a;
+                    loopi(3) if(a < colour[i]) colour[i] = a;
                 }
                 if(game::focus == &game::player1 || !game::thirdpersonview(true))
                 {
